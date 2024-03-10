@@ -1,32 +1,19 @@
 using System;
 
-sealed class Array2 : ArrayBase
+sealed class Array2<T> : ArrayBase<T?>
 {
     private Random random;
-    private int[,] array;
+    private IValueProvider<T> _provider;
+    private T[,] array;
 
-    public Array2()
-    {
-        InitializeArray();
+    public Array2() : base()
+    {        
+
     }
 
-    protected override void InitializeArray()
+    protected void InitializeArray()
     {
-        Console.Write("Enter 'true' for user input or 'false' for random input: ");
-        string userInput = Console.ReadLine();
-
-        bool.TryParse(userInput, out bool isUserInput);
         
-        random = new Random();
-
-        if (isUserInput)
-        {
-            ArrUsInp();
-        }
-        else
-        {
-            ArrRand();
-        }
     }
 
     protected override void ArrUsInp()
@@ -40,7 +27,7 @@ sealed class Array2 : ArrayBase
         int.TryParse(rowsInput, out int rows); 
         int.TryParse(columnsInput, out int columns);
         
-        array = new int[rows, columns];
+        array = new T[rows, columns];
 
         for (int i = 0; i < array.GetLength(0); i++)
         {
@@ -51,7 +38,7 @@ sealed class Array2 : ArrayBase
 
                 if (int.TryParse(userInput, out int value))
                 {
-                    array[i, j] = value;
+                    array[i, j] = (T)(object)value;
                 }
                 else
                 {
@@ -63,6 +50,8 @@ sealed class Array2 : ArrayBase
 
     protected override void ArrRand()
     {
+        random = new Random();
+        
         Console.Write("Enter the number of rows for the array2: ");
         string rowsInput = Console.ReadLine();
 
@@ -72,27 +61,47 @@ sealed class Array2 : ArrayBase
         int.TryParse(rowsInput, out int rows); 
         int.TryParse(columnsInput, out int columns);
         
-        array = new int[rows, columns];
+        array = new T[rows, columns];
         
         for (int i = 0; i < array.GetLength(0); i++)
         {
             for (int j = 0; j < array.GetLength(1); j++)
             {
-                array[i, j] = random.Next(1, 101);
+                array[i, j] = CreateRandomValue();
             }
         }
     }
 
+
+   private T CreateRandomValue() 
+    {
+        if (typeof(T) == typeof(int)) 
+        {
+            Random random = new Random(); 
+
+            int minValue = 1; 
+            int maxValue = 100;
+
+            return (T)(object)random.Next(minValue, maxValue);
+        }
+        else
+        {
+            throw new InvalidOperationException($"The type {typeof(T).FullName} is not supported.");
+        }
+    }
+
+
+
     public override double GetAverage()
     {
-        int sum = 0;
+        long sum = 0;
         int count = 0;
 
         for (int i = 0; i < array.GetLength(0); i++)
         {
             for (int j = 0; j < array.GetLength(1); j++)
             {
-                sum += array[i, j];
+                sum += Convert.ToInt64(array[i, j]);
                 count++;
             }
         }

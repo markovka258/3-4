@@ -1,7 +1,30 @@
 using System;
-public abstract class ArrayBase : IArray, IPrinter
+public abstract class ArrayBase<T> : IArray, IPrinter
 {
-    protected abstract void InitializeArray();
+    
+    private Random random;
+
+    public ArrayBase()
+    {
+        InitializeArray();
+    }
+
+    protected virtual void InitializeArray()
+    {
+        Console.Write("Enter 'true' for user input or 'false' for random input: ");
+        string userInput = Console.ReadLine();
+
+        bool.TryParse(userInput, out bool isUserInput);
+        
+        if (isUserInput)
+        {
+            ArrUsInp();
+        }
+        else
+        {
+            ArrRand();
+        }
+    }
 
     protected abstract void ArrUsInp();
 
