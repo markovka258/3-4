@@ -3,15 +3,20 @@ internal class Program
 {
     static void Main()
     {
-        Array1<int> intArray1= new Array1<int>();
-        Array1<double> doubleArray1 = new Array1<double>();
-        Array1<bool> boolArray1 = new Array1<bool>();
+        IValueProvider<int> intarrayprov = new  ProvValInt();
+        IValueProvider<double> doubarrayprov = new  ProvValInt();
+        IValueProvider<bool> boolarrayprov = new  ProvValInt();
+        IValueProvider<string> strarrayprov = new  ProvValInt();
+
+        Array1<int> intArray1= new Array1<int>(intarrayprov);
+        Array1<double> doubleArray1 = new Array1<double>(doubarrayprov);
+        Array1<bool> boolArray1 = new Array1<bool>(boolarrayprov);
         Array1<string> stringArray1 = new Array1<string>();
 
-        Array2<int> intArray2 = new Array2<int>();
-        Array2<double> doubleArray2 = new Array2<double>();
-        Array2<bool> boolArray2 = new Array2<bool>();
-        Array2<string> stringArray2 = new Array2<string>();
+        Array2<int> intArray2 = new Array2<int>(intarrayprov);
+        Array2<double> doubleArray2 = new Array2<double>(doubarrayprov);
+        Array2<bool> boolArray2 = new Array2<bool>(boolarrayprov);
+        Array2<string> stringArray2 = new Array2<string>(strarrayprov);
 
         IPrinter[] printers = new IPrinter[]
         {
@@ -22,19 +27,6 @@ internal class Program
         {
             Console.WriteLine($"Элементы массива {printer.GetType()}:");
             printer.Print();
-
-            if (printer is IArray array)
-            {
-               if (array is Array1<int> array11)
-               {
-                    Console.WriteLine($"Среднее значение {array11.GetType()} массива {array11.GetAverage()}");
-               }
-
-               else if ( array is Array1<double> array12)
-               {
-                    Console.WriteLine($"Среднее значение {array12.GetType()} массива {array12.GetAverage()}");
-               }
-            }
         }
     }
 }

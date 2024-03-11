@@ -30,7 +30,5 @@ public abstract class ArrayBase<T> : IArray, IPrinter
 
     protected abstract void ArrRand();
 
-    public abstract double GetAverage();
-
     public abstract void Print();
 }

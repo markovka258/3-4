@@ -11,9 +11,9 @@ sealed class Array1<T> : ArrayBase<T> where T : struct
     private IValueProvider<T> _provider;
     private T[] array;
 
-    public Array1() : base()
+    public Array1(IValueProvider<T> provider) : base()
     {        
-
+        _provider = provider;
     }
 
     protected void InitializeArray()
@@ -79,57 +79,8 @@ sealed class Array1<T> : ArrayBase<T> where T : struct
         
         for (int i = 0; i < array.Length; i++)
         {
-            array[i] = CreateRandomValue();
+            array[i] = _provider.GetRandomValue();
         }
-    }
-    
-
-    private T CreateRandomValue() 
-    {
-        if (typeof(T) == typeof(int)) 
-        {
-            Random random = new Random(); 
-
-            int minValue = 1; 
-            int maxValue = 100;
-
-            return (T)(object)random.Next(minValue, maxValue);
-        }
-
-        else if (typeof(T) == typeof(double))
-        {
-            Random random = new Random();
-            
-            double minValue = 1.0;
-            double maxValue = 100.0;
-
-            return (T)(object)(random.NextDouble() * (maxValue - minValue) + minValue);
-        }
-
-        else if (typeof(T) == typeof(bool))
-        {
-            Random random = new Random();
-
-            return (T)(object)random.Next(0, 2) == 0;
-        }
-
-        else
-        {
-            throw new InvalidOperationException($"The type {typeof(T).FullName} is not supported.");
-        }
-    }
-
-
-    public override double GetAverage()
-    {
-        long sum = 0;
-
-        foreach (T value in array)
-        {
-            sum += Convert.ToInt64(value);
-        }
-
-        return (double)sum / array.Length;
     }
 
     public override void Print()
