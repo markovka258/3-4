@@ -4,14 +4,14 @@ internal class Program
     static void Main()
     {
         IValueProvider<int> intarrayprov = new  ProvValInt();
-        IValueProvider<double> doubarrayprov = new  ProvValInt();
-        IValueProvider<bool> boolarrayprov = new  ProvValInt();
-        IValueProvider<string> strarrayprov = new  ProvValInt();
+        IValueProvider<double> doubarrayprov = new  ProvValDoub();
+        IValueProvider<bool> boolarrayprov = new  ProvValBool();
+        IValueProvider<string> strarrayprov = new  ProvValStr();
 
         Array1<int> intArray1= new Array1<int>(intarrayprov);
         Array1<double> doubleArray1 = new Array1<double>(doubarrayprov);
         Array1<bool> boolArray1 = new Array1<bool>(boolarrayprov);
-        Array1<string> stringArray1 = new Array1<string>();
+        Array1<string> stringArray1 = new Array1<string>(strarrayprov);
 
         Array2<int> intArray2 = new Array2<int>(intarrayprov);
         Array2<double> doubleArray2 = new Array2<double>(doubarrayprov);

@@ -4,10 +4,6 @@ public abstract class ArrayBase<T> : IArray, IPrinter
     
     private Random random;
 
-    public ArrayBase()
-    {
-        InitializeArray();
-    }
 
     protected virtual void InitializeArray()
     {

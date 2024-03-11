@@ -5,22 +5,18 @@
 using System;
 using System.Collections.Concurrent;
 
-sealed class Array1<T> : ArrayBase<T> where T : struct
+sealed class Array1<T> : ArrayBase<T> 
 {
     private Random random;
     private IValueProvider<T> _provider;
     private T[] array;
 
-    public Array1(IValueProvider<T> provider) : base()
-    {        
+    public Array1(IValueProvider<T> provider) 
+    {    
         _provider = provider;
-    }
 
-    protected void InitializeArray()
-    {
-       
+        InitializeArray();
     }
-    
 
     protected override void ArrUsInp()
     {
@@ -67,9 +63,7 @@ sealed class Array1<T> : ArrayBase<T> where T : struct
 
 
     protected override void ArrRand()
-    {
-        random = new Random();
-        
+    {        
         Console.Write("Enter the length of the array1: ");
         string lengthInput = Console.ReadLine();
 

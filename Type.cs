@@ -11,7 +11,7 @@ class ProvValInt:IValueProvider<int>
     public int GetRandomValue()
     {
         Random random = new Random();
-        int a = random.Next(0,2);
+        int a = random.Next(0,10);
         return a;
     }
 }

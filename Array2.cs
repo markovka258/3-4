@@ -9,13 +9,10 @@ sealed class Array2<T> : ArrayBase<T?>
     public Array2(IValueProvider<T> provider) : base()
     {        
         _provider = provider;
-    }
 
-    protected void InitializeArray()
-    {
-        
+        InitializeArray();
     }
-
+    
     protected override void ArrUsInp()
     {
         Console.Write("Enter the number of rows for the array2: ");
