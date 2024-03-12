@@ -19,11 +19,12 @@ sealed class Array1<T> : ArrayBase<T>
     }
 
     protected override void ArrUsInp()
-    {
+     {
         Console.Write("Enter the length of the array1: ");
         string lengthInput = Console.ReadLine();
 
         int.TryParse(lengthInput, out int length);
+
         array = new T[length];
 
         Console.WriteLine($"Введите {array.Length} чисел:");
@@ -32,33 +33,17 @@ sealed class Array1<T> : ArrayBase<T>
         {
             string userInput = Console.ReadLine();
 
-            if (userInput.Contains(","))
-            {
-                string[] doubleStrings = userInput.Split(',');
-                double[] doubleValues = new double[doubleStrings.Length];
-
-                for (int j = 0; j < doubleStrings.Length; j++)
-                {
-                    if (!double.TryParse(doubleStrings[j].Trim(), out doubleValues[j]))
-                    {
-                        throw new ArgumentException("Invalid user input");
-                    }
-                }
-
-                array[i] = (T)(object)doubleValues;
-            }
-
-            else if (double.TryParse(userInput, out double value))
+            if (int.TryParse(userInput, out int value))
             {
                 array[i] = (T)(object)value;
             }
-            
             else
             {
                 throw new ArgumentException("Invalid user input");
             }
         }
     }
+
 
 
 
