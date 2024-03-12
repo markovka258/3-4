@@ -27,7 +27,7 @@ sealed class Array1<T> : ArrayBase<T>
 
         array = new T[length];
 
-        Console.WriteLine($"Введите {array.Length} чисел:");
+        Console.WriteLine($"Введите {array.Length} значений:");
 
         for (int i = 0; i < array.Length; i++)
         {
